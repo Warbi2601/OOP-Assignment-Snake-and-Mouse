@@ -1,5 +1,5 @@
-//#ifndef UserInterfaceH
-//#define UserInterfaceH 
+#ifndef UserInterfaceH
+#define UserInterfaceH 
 
 
 #include <iostream>		
@@ -16,4 +16,4 @@ class UserInterface
 		void hold_window();
 };
 
-//#endif
+#endif
