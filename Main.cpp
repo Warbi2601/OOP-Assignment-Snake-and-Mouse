@@ -10,11 +10,11 @@ using namespace std;
 #include "UserInterface.h"
 #include "Game.h"
 
-// using OO approach
-UserInterface ui;
-
 int main()
 {
+	// using OO approach
+	UserInterface ui;
+
 	Game game;
 
 	game.set_up(&ui);
