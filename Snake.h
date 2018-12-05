@@ -1,13 +1,12 @@
-
-#ifndef SnakeH
-#define SnakeH 
+#pragma once
 
 #include "Mouse.h"
+#include "MoveableGridItem.h"
 #include "RandomNumberGenerator.h"
 
-class Snake {
+class Snake : public MoveableGridItem {
 	public:
-		Snake();
+		Snake(int x, int y);
 		~Snake();
 		bool is_at_position(int x, int y);  
 		bool has_caught_mouse() ;
@@ -21,5 +20,3 @@ class Snake {
 		Mouse* p_mouse_;
 		RandomNumberGenerator rng_;
 };
-
-#endif 

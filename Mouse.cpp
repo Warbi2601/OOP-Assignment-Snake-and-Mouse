@@ -1,28 +1,8 @@
 #include "Mouse.h"
 
-Mouse::Mouse() : symbol_(MOUSE), x_(0), y_(0), alive_(true), escaped_(false), mouse_dx_(0), mouse_dy_(0)
+Mouse::Mouse() : MoveableGridItem(MOUSE, 0, 0), alive_(true), escaped_(false), mouse_dx_(0), mouse_dy_(0)
 {
 	position_in_middle_of_grid();
-}
-
-int Mouse::get_x()
-{
-	return x_;
-}
-
-int Mouse::get_y()
-{
-	return y_;
-}
-
-char Mouse::get_symbol() const
-{
-	return symbol_;
-}
-
-bool Mouse::is_at_position(int x, int y)
-{
-	return (x_ == x) && (y_ == y);
 }
 
 bool Mouse::is_alive() const
@@ -91,12 +71,6 @@ void Mouse::scamper(char k)
 	{
 		update_position(mouse_dx_, mouse_dy_);
 	}
-}
-
-void Mouse::update_position(int dx, int dy)
-{
-	x_ += dx;
-	y_ += dy;
 }
 
 void Mouse::position_in_middle_of_grid()

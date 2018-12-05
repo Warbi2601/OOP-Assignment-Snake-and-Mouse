@@ -1,11 +1,11 @@
 #ifndef MouseH 
 #define MouseH 
 
-
 #include "constants.h"
+#include "MoveableGridItem.h"
 #include "Underground.h"
 
-class Mouse
+class Mouse : public MoveableGridItem
 {
 	public:
 		// constructor
