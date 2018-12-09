@@ -9,6 +9,10 @@
 
 using namespace std;
 
+Game::Game() {
+
+}
+
 void Game::set_up(UserInterface* pui)
 {
 	// set up the holes

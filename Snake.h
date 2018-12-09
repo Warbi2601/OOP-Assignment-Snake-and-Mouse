@@ -6,7 +6,7 @@
 
 class Snake : public MoveableGridItem {
 	public:
-		Snake(int x, int y);
+		Snake();
 		~Snake();
 		bool is_at_position(int x, int y);  
 		bool has_caught_mouse() ;
@@ -14,7 +14,6 @@ class Snake : public MoveableGridItem {
 		void chase_mouse();
 		void set_direction(int& dx, int& dy);
 		void position_at_random();
-		void update_position(int dx, int dy);
 		char symbol_;
 		int x_, y_;
 		Mouse* p_mouse_;

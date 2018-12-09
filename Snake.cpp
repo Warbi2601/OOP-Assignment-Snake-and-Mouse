@@ -3,7 +3,7 @@
 #include "Mouse.h"
 #include "RandomNumberGenerator.h"
 
-Snake::Snake(int x, int y) : MoveableGridItem(SNAKEHEAD, x, y)
+Snake::Snake() : MoveableGridItem(SNAKEHEAD, 0, 0)
 {
 	position_at_random();
 

@@ -7,6 +7,7 @@
 
 class Game {
 	public:
+	Game();
 	Mouse mouse_;
 	Snake snake_;
 	Underground underground_;
