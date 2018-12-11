@@ -144,7 +144,14 @@ void Game::apply_rules()
 	{
 		if (underground_.has_reached_a_hole(mouse_))
 		{
-			mouse_.escape_into_hole();
+			if (nut_.has_been_collected())
+			{
+				mouse_.escape_into_hole();
+			}
+			else
+			{
+				//error message saying "You can't escape without the nut!" or something
+			}
 		}
 		else
 		{
