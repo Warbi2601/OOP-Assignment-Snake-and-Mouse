@@ -24,6 +24,7 @@
     <ClCompile Include="GridItem.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MoveableGridItem.cpp" />
+    <ClCompile Include="Nut.cpp" />
     <ClCompile Include="UserInterface.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="RandomNumberGenerator.cpp" />
@@ -36,6 +37,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GridItem.h" />
     <ClInclude Include="MoveableGridItem.h" />
+    <ClInclude Include="Nut.h" />
     <ClInclude Include="Snake.h" />
     <ClInclude Include="UserInterface.h" />
     <ClInclude Include="Mouse.h" />

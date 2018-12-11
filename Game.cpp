@@ -9,7 +9,7 @@
 
 using namespace std;
 
-Game::Game() {
+Game::Game() : nut_(Nut(8, 9)) {
 
 }
 
@@ -93,12 +93,19 @@ string Game::prepare_grid()
 				}
 				else
 				{
-					const int hole_no(find_hole_number_at_position(col, row));
-
-					if (hole_no != -1)
-						os << underground_.get_hole_no(hole_no).get_symbol();
+ 					if ((row == nut_.get_y()) && (col == nut_.get_x()))
+					{
+						os << (nut_.has_been_collected() ? FREECELL : nut_.get_symbol());
+					}
 					else
-						os << FREECELL;
+					{
+						const int hole_no(find_hole_number_at_position(col, row));
+
+						if (hole_no != -1)
+							os << underground_.get_hole_no(hole_no).get_symbol();
+						else
+							os << FREECELL;
+					}
 				}
 			}
 		}
@@ -128,6 +135,7 @@ int Game::find_hole_number_at_position(int x, int y)
 
 void Game::apply_rules()
 {
+	//potentially change into switch statement
 	if (snake_.has_caught_mouse())
 	{
 		mouse_.die();
@@ -136,7 +144,21 @@ void Game::apply_rules()
 	{
 		if (underground_.has_reached_a_hole(mouse_))
 		{
-			mouse_.escape_into_hole();
+			if (nut_.has_been_collected())
+			{
+				mouse_.escape_into_hole();
+			}
+			else
+			{
+				//error message saying "You can't escape without the nut!" or something
+			}
+		}
+		else
+		{
+			if((nut_.is_at_position(mouse_.get_x(), mouse_.get_y())) && (!nut_.has_been_collected()))
+			{
+				nut_.collect_nut();
+			}
 		}
 	}
 }
