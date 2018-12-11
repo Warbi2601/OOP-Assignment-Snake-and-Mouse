@@ -3,6 +3,7 @@
 
 #include "Mouse.h"
 #include "Snake.h"
+#include "Underground.h"
 #include "UserInterface.h"
 
 class Game {

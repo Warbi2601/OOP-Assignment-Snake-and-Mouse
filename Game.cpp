@@ -134,7 +134,7 @@ void Game::apply_rules()
 	}
 	else
 	{
-		if (mouse_.has_reached_a_hole(underground_))
+		if (underground_.has_reached_a_hole(mouse_))
 		{
 			mouse_.escape_into_hole();
 		}
