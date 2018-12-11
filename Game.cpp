@@ -13,23 +13,6 @@ Game::Game() {
 
 }
 
-//Mouse Game::getMouse()
-//{
-//	return mouse_;
-//}
-//Snake Game::getSnake() 
-//{
-//	return snake_;
-//}
-//Underground Game::getUnderground()
-//{
-//	return underground_;
-//}
-//UserInterface* Game::getUserInterface()
-//{
-//	return p_ui;
-//}
-
 void Game::set_up(UserInterface* pui)
 {
 	// set up the holes

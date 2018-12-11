@@ -39,8 +39,3 @@ bool Underground::is_valid_hole_number(int no) const
 {
 	return (no >= 0) && (no < holes_.size());
 }
-
-vector<Hole> Underground::getHoles() const
-{
-	return holes_;
-}
