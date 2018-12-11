@@ -8,6 +8,7 @@
 #include "constants.h"
 #include "RandomNumberGenerator.h"
 #include "FixedGridItem.h"
+#include "Mouse.h"
 
 using namespace std;
 
@@ -29,6 +30,7 @@ class Underground
 		Hole get_hole_no(int no) const;
 		// void set_hole_no_at_position(int no, int x, int y);
 		bool is_valid_hole_number(int n) const;
+		bool has_reached_a_hole(Mouse& mouse) const;
 		const vector<Hole> holes_;
 };
 
