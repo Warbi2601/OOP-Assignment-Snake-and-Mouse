@@ -5,6 +5,7 @@
 #include "Snake.h"
 #include "Underground.h"
 #include "UserInterface.h"
+#include "Nut.h"
 
 class Game {
 public:
@@ -30,6 +31,7 @@ private:
 	Snake snake_;
 	Underground underground_;
 	UserInterface* p_ui;
+	Nut nut_;
 };
 
 #endif // !defined(GameH)

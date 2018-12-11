@@ -1,17 +1,14 @@
 #pragma once
 
-class Nut {
+#include "FixedGridItem.h"
+#include "constants.h"
+
+class Nut : public FixedGridItem {
 	public:
 		Nut(int, int);
-		int get_x();
-		int get_y();
-		char get_symbol();
 		bool has_been_collected();
-		bool is_at_position(int, int);
+		void Nut::collect_nut();
 		//dissapear();
 	private:
-		int x;
-		int y;
-		char symbol;
 		bool collected;
 };
