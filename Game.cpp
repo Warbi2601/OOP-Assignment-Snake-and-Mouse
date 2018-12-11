@@ -13,6 +13,24 @@ Game::Game() {
 
 }
 
+//Mouse Game::getMouse()
+//{
+//	return mouse_;
+//}
+//Snake Game::getSnake() 
+//{
+//	return snake_;
+//}
+//Underground Game::getUnderground()
+//{
+//	return underground_;
+//}
+//UserInterface* Game::getUserInterface()
+//{
+//	return p_ui;
+//}
+
+
 void Game::set_up(UserInterface* pui)
 {
 	// set up the holes
@@ -97,7 +115,7 @@ bool Game::is_arrow_key_code(int keycode)
 
 int Game::find_hole_number_at_position(int x, int y)
 {
-	for (int h_no(0); h_no < underground_.holes_.size(); ++h_no)
+	for (int h_no(0); h_no < underground_.getHoles().size(); ++h_no)
 	{
 		if (underground_.get_hole_no(h_no).is_at_position(x, y))
 		{

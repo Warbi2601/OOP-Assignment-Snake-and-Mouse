@@ -6,13 +6,14 @@
 #include "UserInterface.h"
 
 class Game {
-	public:
+public:
 	Game();
-	Mouse mouse_;
-	Snake snake_;
-	Underground underground_;
-	UserInterface* p_ui;
 
+	//@TODO MAY NOT NEED THESE
+	//Mouse getMouse();
+	//Snake getSnake();
+	//Underground getUnderground();
+	//UserInterface* getUserInterface();
 	int key_;
 	void set_up(UserInterface* pui);
 	void run();
@@ -22,6 +23,12 @@ class Game {
 	int find_hole_number_at_position(int x, int y);
 	bool has_ended(char key);
 	string prepare_end_message();
+
+private:
+	Mouse mouse_;
+	Snake snake_;
+	Underground underground_;
+	UserInterface* p_ui;
 };
 
 #endif // !defined(GameH)

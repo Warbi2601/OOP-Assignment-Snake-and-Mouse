@@ -54,3 +54,8 @@ bool Underground::has_reached_a_hole(Mouse& mouse) const
 	}
 	return false;
 }
+
+vector<Hole> Underground::getHoles() const
+{
+	return holes_;
+}
