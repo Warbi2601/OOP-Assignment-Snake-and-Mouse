@@ -16,5 +16,5 @@ class Snake : public MoveableGridItem {
 		
 	private:
 		Mouse* p_mouse_;
-		RandomNumberGenerator rng_;
+		static const RandomNumberGenerator rng_;
 };
