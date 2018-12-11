@@ -67,7 +67,7 @@ void Mouse::scamper(char k)
 	}
 
 	// update mouse coordinates if move is possible
-	if (((x_ + mouse_dx_) >= 1) && ((x_ + mouse_dx_) <= SIZE) && ((y_ + mouse_dy_) >= 1) && ((y_ + mouse_dy_) <= SIZE))
+	if (((get_x() + mouse_dx_) >= 1) && ((get_x() + mouse_dx_) <= SIZE) && ((get_y() + mouse_dy_) >= 1) && ((get_y() + mouse_dy_) <= SIZE))
 	{
 		update_position(mouse_dx_, mouse_dy_);
 	}
@@ -75,6 +75,6 @@ void Mouse::scamper(char k)
 
 void Mouse::position_in_middle_of_grid()
 {
-	x_ = SIZE / 2;
-	y_ = SIZE / 2;
+	set_x(SIZE / 2);
+	set_y(SIZE / 2);
 }

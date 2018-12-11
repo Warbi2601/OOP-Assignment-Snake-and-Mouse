@@ -21,9 +21,6 @@ class Mouse : public MoveableGridItem
 		void escape_into_hole();
 		void scamper(char k);
 
-		char symbol_;
-		int  x_, y_;
-
 	private:
 		// data members
 		bool alive_;

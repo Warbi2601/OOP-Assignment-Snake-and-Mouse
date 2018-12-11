@@ -11,7 +11,7 @@ public:
 	const int get_y();
 	bool is_at_position(int x, int y);
 private:
-	int x_;
-	int y_;
+	const int x_;
+	const int y_;
 };
 

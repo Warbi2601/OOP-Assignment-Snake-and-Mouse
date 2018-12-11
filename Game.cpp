@@ -16,9 +16,9 @@ Game::Game() {
 void Game::set_up(UserInterface* pui)
 {
 	// set up the holes
-	underground_.set_hole_no_at_position(0, 4, 3);
+	/* underground_.set_hole_no_at_position(0, 4, 3);
 	underground_.set_hole_no_at_position(1, 15, 10);
-	underground_.set_hole_no_at_position(2, 7, 15);
+	underground_.set_hole_no_at_position(2, 7, 15); */
 
 	// mouse state already set up in its contructor
 
@@ -63,9 +63,9 @@ string Game::prepare_grid()
 	{
 		for (int col(1); col <= SIZE; ++col)
 		{
-			if ((row == snake_.y_) && (col == snake_.x_))
+			if ((row == snake_.get_y()) && (col == snake_.get_x()))
 			{
-				os << snake_.symbol_;
+				os << snake_.get_symbol();
 			}
 			else
 			{

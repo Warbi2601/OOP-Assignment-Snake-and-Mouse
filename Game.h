@@ -1,7 +1,7 @@
 #if !defined(GameH)
 #define GameH
 
-#include	 "Mouse.h"
+#include "Mouse.h"
 #include "Snake.h"
 #include "UserInterface.h"
 
