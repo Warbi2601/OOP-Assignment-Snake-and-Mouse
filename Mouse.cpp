@@ -11,7 +11,7 @@ bool Mouse::is_alive() const
 }
 
 bool Mouse::has_escaped() const
-{
+{	
 	return escaped_;
 }
 
