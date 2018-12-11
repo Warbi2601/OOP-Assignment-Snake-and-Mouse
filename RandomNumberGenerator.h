@@ -13,11 +13,11 @@ class RandomNumberGenerator
 		RandomNumberGenerator();
 
 		// assessors
-		int get_random_value(int) const;
+		static int get_random_value(int);
 
 	private:
 		// supporting functions
-		void seed() const;
+		static void seed();
 };
 
 #endif

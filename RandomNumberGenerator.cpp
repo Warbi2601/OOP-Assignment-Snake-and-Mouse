@@ -6,12 +6,12 @@ RandomNumberGenerator::RandomNumberGenerator()
 	seed();
 }
 
-int RandomNumberGenerator::get_random_value(int max) const
+int RandomNumberGenerator::get_random_value(int max)
 {
 	// produce a random number in range [1..max]
 	return (rand() % max) + 1;
 }
-void RandomNumberGenerator::seed() const
+void RandomNumberGenerator::seed()
 {
 	// seed the random number generator from current system time
 	// so that the numbers will be different every time we run

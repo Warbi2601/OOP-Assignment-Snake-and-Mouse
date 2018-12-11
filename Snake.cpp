@@ -59,6 +59,8 @@ void Snake::set_direction(int& dx, int& dy)
 		dy = -1;						 // snake should move up
 }
 
+const RandomNumberGenerator Snake::rng_;
+
 void Snake::position_at_random()
 {
 	// WARNING: this may place on top of other things
