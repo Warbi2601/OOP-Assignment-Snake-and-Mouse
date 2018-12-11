@@ -7,6 +7,7 @@ Hole::Hole() : FixedGridItem(HOLE, 0, 0)
 
 Hole::Hole(int x, int y) : FixedGridItem(HOLE, x, y)
 {
+
 }
 
 // number of holes in underground
@@ -38,6 +39,20 @@ Hole Underground::get_hole_no(int no) const
 bool Underground::is_valid_hole_number(int no) const
 {
 	return (no >= 0) && (no < holes_.size());
+}
+
+bool Underground::has_reached_a_hole(Mouse& mouse) const
+{
+	for (int h_no(0); h_no < holes_.size(); ++h_no)
+	{
+		Hole h = get_hole_no(h_no);
+
+		if (mouse.is_at_position(h.get_x(), h.get_y()))
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 vector<Hole> Underground::getHoles() const

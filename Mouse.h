@@ -3,7 +3,6 @@
 
 #include "constants.h"
 #include "MoveableGridItem.h"
-#include "Underground.h"
 
 class Mouse : public MoveableGridItem
 {
@@ -14,7 +13,6 @@ class Mouse : public MoveableGridItem
 		// assessors
 		bool is_alive() const;
 		bool has_escaped() const;
-		bool has_reached_a_hole(Underground ug);
 
 		// mutators
 		void die();
