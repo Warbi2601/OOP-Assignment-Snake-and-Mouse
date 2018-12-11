@@ -20,7 +20,10 @@ void UserInterface::draw_grid_on_screen(const string& grid_data) const
 	// clear screen
 	system("cls");
 
-	cout << grid_data;
+	cout << grid_data << "\n";
+
+	cout << "Player: " << "PlayerName" << "\n";
+	cout << "Score: " << "PlayerScore" << "\n";
 }
 
 void UserInterface::show_results_on_screen(string message) const
