@@ -17,7 +17,7 @@ class RandomNumberGenerator
 
 	private:
 		// supporting functions
-		void seed();
+		void seed() const;
 };
 
 #endif
