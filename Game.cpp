@@ -44,6 +44,9 @@ void Game::set_up(UserInterface* pui)
 	snake_.position_at_random();
 	snake_.spot_mouse(&mouse_);
 
+	// set up nut.
+	
+
 	// set up the UserInterface
 	p_ui = pui;
 }
@@ -52,23 +55,31 @@ void Game::run()
 {
 	assert(p_ui != nullptr);
 
-	p_ui->draw_grid_on_screen(prepare_grid());
-	key_ = p_ui->get_keypress_from_user();
-
-	while (!has_ended(key_))
+	bool playAgain;
+	do
 	{
-		if (is_arrow_key_code(key_))
+		p_ui->draw_grid_on_screen(prepare_grid());
+		key_ = p_ui->get_keypress_from_user();
+
+		while (!has_ended(key_))
 		{
-			mouse_.scamper(key_);
-			snake_.chase_mouse();
-			p_ui->draw_grid_on_screen(prepare_grid());
-			apply_rules();
+			if (is_arrow_key_code(key_))
+			{
+				mouse_.scamper(key_);
+				snake_.chase_mouse();
+				p_ui->draw_grid_on_screen(prepare_grid());
+				apply_rules();
+
+				if (nut_.has_been_collected()) p_ui->show_results_on_screen("NUT COLLECTED, MAKE YOUR WAY TO A HOLE");
+			}
+
+			key_ = p_ui->get_keypress_from_user();
 		}
 
-		key_ = p_ui->get_keypress_from_user();
-	}
-
-	p_ui->show_results_on_screen(prepare_end_message());
+		p_ui->show_results_on_screen(prepare_end_message());
+		playAgain = p_ui->ask_if_users_wants_to_play_again();
+	} 
+	while (playAgain);
 }
 
 string Game::prepare_grid()

@@ -14,6 +14,7 @@ class UserInterface
 		void draw_grid_on_screen(const string& grid_data) const;
 		void show_results_on_screen(string message) const;
 		void hold_window();
+		bool ask_if_users_wants_to_play_again() const;
 };
 
 #endif

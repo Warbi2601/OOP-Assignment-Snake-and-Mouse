@@ -36,3 +36,12 @@ void UserInterface::hold_window()
 	cout << "\n\n";
 	system("pause");
 }
+
+bool UserInterface::ask_if_users_wants_to_play_again() const
+{
+	cout << "\nWould you like to play again? (y/n)\n";
+	char result;
+	cin >> result;
+	if (tolower(result) == 'y') return true;
+	else return false;
+}
