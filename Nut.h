@@ -8,6 +8,7 @@ class Nut : public FixedGridItem {
 		Nut(int, int);
 		bool has_been_collected();
 		void Nut::collect_nut();
+		void reset_nut();
 		//dissapear();
 	private:
 		bool collected;

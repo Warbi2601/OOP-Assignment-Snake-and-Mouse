@@ -1,6 +1,4 @@
-#ifndef UserInterfaceH
-#define UserInterfaceH 
-
+#pragma once
 
 #include <iostream>		
 #include <string>		
@@ -15,6 +13,7 @@ class UserInterface
 		void show_results_on_screen(string message) const;
 		void hold_window();
 		bool ask_if_users_wants_to_play_again() const;
+		string ask_user_for_player_name() const;
+		void show_player_info(string, int) const;
+		
 };
-
-#endif

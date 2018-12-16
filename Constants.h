@@ -1,5 +1,4 @@
-#ifndef ConstantsH 
-#define ConstantsH 
+#pragma once
 
 // defining the size of the grid
 #define SIZE      (20)	// grid dimension
@@ -19,5 +18,3 @@
 
 // defining the other command letters
 #define QUIT      ('Q')	// to end game
-
-#endif

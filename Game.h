@@ -1,21 +1,16 @@
-#if !defined(GameH)
-#define GameH
+#pragma once
 
 #include "Mouse.h"
 #include "Snake.h"
 #include "Underground.h"
 #include "UserInterface.h"
 #include "Nut.h"
+#include "Player.h"
 
 class Game {
 public:
 	Game();
 
-	//@TODO MAY NOT NEED THESE
-	//Mouse getMouse();
-	//Snake getSnake();
-	//Underground getUnderground();
-	//UserInterface* getUserInterface();
 	int key_;
 	void set_up(UserInterface* pui);
 	void run();
@@ -32,6 +27,5 @@ private:
 	Underground underground_;
 	UserInterface* p_ui;
 	Nut nut_;
+	Player player_;
 };
-
-#endif // !defined(GameH)

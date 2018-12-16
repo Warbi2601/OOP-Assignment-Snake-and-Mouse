@@ -13,40 +13,15 @@ Game::Game() : nut_(Nut(8, 9)) {
 
 }
 
-//Mouse Game::getMouse()
-//{
-//	return mouse_;
-//}
-//Snake Game::getSnake() 
-//{
-//	return snake_;
-//}
-//Underground Game::getUnderground()
-//{
-//	return underground_;
-//}
-//UserInterface* Game::getUserInterface()
-//{
-//	return p_ui;
-//}
-
-
 void Game::set_up(UserInterface* pui)
 {
-	// set up the holes
-	/* underground_.set_hole_no_at_position(0, 4, 3);
-	underground_.set_hole_no_at_position(1, 15, 10);
-	underground_.set_hole_no_at_position(2, 7, 15); */
-
-	// mouse state already set up in its contructor
+	// set up player
+	
 
 	// set up snake
 	snake_.position_at_random();
 	snake_.spot_mouse(&mouse_);
-
-	// set up nut.
 	
-
 	// set up the UserInterface
 	p_ui = pui;
 }
@@ -55,10 +30,17 @@ void Game::run()
 {
 	assert(p_ui != nullptr);
 
-	bool playAgain;
+	player_.set_name(p_ui->ask_user_for_player_name());
+
 	do
 	{
+		//Reset mouse, smake and nut
+		mouse_.reset_mouse();
+		nut_.reset_nut();
+		snake_.position_at_random();
+
 		p_ui->draw_grid_on_screen(prepare_grid());
+		p_ui->show_player_info(player_.get_name(), player_.get_score());
 		key_ = p_ui->get_keypress_from_user();
 
 		while (!has_ended(key_))
@@ -68,6 +50,7 @@ void Game::run()
 				mouse_.scamper(key_);
 				snake_.chase_mouse();
 				p_ui->draw_grid_on_screen(prepare_grid());
+				p_ui->show_player_info(player_.get_name(), player_.get_score());
 				apply_rules();
 
 				if (nut_.has_been_collected()) p_ui->show_results_on_screen("NUT COLLECTED, MAKE YOUR WAY TO A HOLE");
@@ -77,9 +60,17 @@ void Game::run()
 		}
 
 		p_ui->show_results_on_screen(prepare_end_message());
-		playAgain = p_ui->ask_if_users_wants_to_play_again();
+
+		if (mouse_.is_alive())
+		{
+			player_.update_score(1);
+		}
+		else if (snake_.has_caught_mouse())
+		{
+			player_.update_score(-1);
+		}
 	} 
-	while (playAgain);
+	while (p_ui->ask_if_users_wants_to_play_again());
 }
 
 string Game::prepare_grid()

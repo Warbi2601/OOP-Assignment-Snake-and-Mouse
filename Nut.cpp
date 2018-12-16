@@ -14,9 +14,10 @@ bool Nut::has_been_collected()
 
 void Nut::collect_nut()
 {
-	//add score
-
-	//add a message saying "YOU COLLECTED A NUT!" or something
-
 	collected = true;
+}
+
+void Nut::reset_nut()
+{
+	this->collected = false;
 }

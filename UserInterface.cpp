@@ -21,9 +21,6 @@ void UserInterface::draw_grid_on_screen(const string& grid_data) const
 	system("cls");
 
 	cout << grid_data << "\n";
-
-	cout << "Player: " << "PlayerName" << "\n";
-	cout << "Score: " << "PlayerScore" << "\n";
 }
 
 void UserInterface::show_results_on_screen(string message) const
@@ -44,4 +41,18 @@ bool UserInterface::ask_if_users_wants_to_play_again() const
 	cin >> result;
 	if (tolower(result) == 'y') return true;
 	else return false;
+}
+
+string UserInterface::ask_user_for_player_name() const
+{
+	cout << "Enter your player name!\n";
+	string name;
+	cin >> name;
+	return name;
+}
+
+void UserInterface::show_player_info(string name, int score) const
+{
+	cout << "Player: " << name << "\n";
+	cout << "Score: " << score << "\n";
 }

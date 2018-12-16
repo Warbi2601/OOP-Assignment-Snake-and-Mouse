@@ -7,7 +7,7 @@ using namespace std;
 class Player {
 	public : 
 		string get_name() const;
-		void set_name();
+		void set_name(string);
 		int get_score() const;
 		void update_score(int);
 	

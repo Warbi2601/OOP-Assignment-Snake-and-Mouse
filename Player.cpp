@@ -1,13 +1,12 @@
 #include "Player.h"
-#include <iostream>
+#include <string>
 
 string Player::get_name() const {
 	return name_;
 }
 
-void Player::set_name() {
-	cout << "Enter your name: ";
-	cin >> name_;
+void Player::set_name(string name) {
+	this->name_ = name;
 }
 
 int Player::get_score() const {

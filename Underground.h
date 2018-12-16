@@ -1,6 +1,4 @@
-#ifndef UndergroundH
-#define UndergroundH
-
+#pragma once
 
 #include <cassert>
 #include <vector>
@@ -36,5 +34,3 @@ class Underground
 	private:
 		const vector<Hole> holes_;
 };
-
-#endif

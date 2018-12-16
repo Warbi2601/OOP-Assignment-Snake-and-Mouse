@@ -63,3 +63,10 @@ void Mouse::position_in_middle_of_grid()
 	set_x(SIZE / 2);
 	set_y(SIZE / 2);
 }
+
+void Mouse::reset_mouse()
+{
+	this->alive_ = true;
+	this->escaped_ = false;
+	position_in_middle_of_grid();
+}
