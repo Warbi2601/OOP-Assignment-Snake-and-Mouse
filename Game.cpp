@@ -79,23 +79,26 @@ string Game::prepare_grid()
 
 	ostringstream os;
 
-	for (int row(1); row <= SIZE; ++row)
+	for (int col(1); col <= SIZE; ++col)
 	{
-		for (int col(1); col <= SIZE; ++col)
+		for (int row(1); row <= SIZE; ++row)
 		{
-			if ((row == snake_.get_y()) && (col == snake_.get_x()))
+			if (snake_.is_at_position(row, col))
 			{
 				os << snake_.get_symbol();
 			}
+			else if (snake_.get_tail(row, col)) {
+				os << SNAKETAIL;
+			}
 			else
 			{
-				if ((row == mouse_.get_y()) && (col == mouse_.get_x()))
+				if (mouse_.is_at_position(row, col))
 				{
 					os << mouse_.get_symbol();
 				}
 				else
 				{
- 					if ((row == nut_.get_y()) && (col == nut_.get_x()))
+ 					if (nut_.is_at_position(row, col))
 					{
 						os << (nut_.has_been_collected() ? FREECELL : nut_.get_symbol());
 					}

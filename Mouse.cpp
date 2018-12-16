@@ -38,7 +38,7 @@ void Mouse::scamper(char k)
 			mouse_dy_ = 0;
 			break;
 		case RIGHT:
-			mouse_dx_ = +1;
+			mouse_dx_ = 1;
 			mouse_dy_ = 0;
 			break;
 		case UP:
@@ -47,7 +47,7 @@ void Mouse::scamper(char k)
 			break;
 		case DOWN:
 			mouse_dx_ = 0;
-			mouse_dy_ = +1;
+			mouse_dy_ = 1;
 			break;
 	}
 

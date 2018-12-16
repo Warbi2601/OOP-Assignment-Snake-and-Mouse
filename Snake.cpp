@@ -35,6 +35,8 @@ void Snake::chase_mouse()
 	//identify direction of travel
 	set_direction(snake_dx, snake_dy);
 
+	move_tail();
+
 	//go in that direction
 	update_position(snake_dx, snake_dy);
 }
@@ -57,6 +59,22 @@ void Snake::set_direction(int& dx, int& dy)
 		dy = 1;                          // snake should move down
 	else if (get_y() > p_mouse_->get_y())     // if snake is below mouse
 		dy = -1;						 // snake should move up
+}
+
+void Snake::move_tail() {
+	if (tail_.size() < 3) {
+		tail_.push_back(MoveableGridItem(SNAKETAIL, get_x(), get_y()));
+	}
+}
+
+MoveableGridItem *Snake::get_tail(int x, int y) {
+	for (auto &item : tail_) {
+		if (item.is_at_position(x, y)) {
+			return &item;
+		}
+	}
+	return nullptr;
+;
 }
 
 const RandomNumberGenerator Snake::rng_;
