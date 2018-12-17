@@ -5,10 +5,8 @@
 
 Snake::Snake() : MoveableGridItem(SNAKEHEAD, 0, 0)
 {
-	position_at_random();
-
 	// make the pointer safe before the snake spots the mouse
-	p_mouse_ = nullptr;
+	// p_mouse_ = nullptr;
 }
 
 Snake::~Snake()
@@ -62,8 +60,28 @@ void Snake::set_direction(int& dx, int& dy)
 }
 
 void Snake::move_tail() {
-	if (tail_.size() < 3) {
-		tail_.push_back(MoveableGridItem(SNAKETAIL, get_x(), get_y()));
+	int x(0), y(0), size = tail_.size();
+
+	if (!x && !y) {
+		x = get_x();
+		y = get_y();
+	}
+
+	if (size > 0) {
+		for (auto &item : tail_) {
+			int temp_x = item.get_x(),
+				temp_y = item.get_y();
+
+			item.set_x(x);
+			item.set_y(y);
+
+			x = temp_x;
+			y = temp_y;
+		}
+	}
+
+	if(size < 3) {
+		tail_.push_back(MoveableGridItem(SNAKETAIL, x, y));
 	}
 }
 
@@ -81,9 +99,24 @@ const RandomNumberGenerator Snake::rng_;
 
 void Snake::position_at_random()
 {
-	// WARNING: this may place on top of other things
+	assert(p_mouse_ != nullptr);
+	tail_.clear();
 
-	// TODO create setters
-	set_x(rng_.get_random_value(SIZE));
-	set_y(rng_.get_random_value(SIZE));
+	// WARNING: this may place on top of other things
+	bool valid = false;
+	int x(0), y(0);
+
+	while (!valid) {
+		x = rng_.get_random_value(SIZE);
+		y = rng_.get_random_value(SIZE);
+
+		int dx = (x - p_mouse_->get_x());
+		int dy = (y - p_mouse_->get_y());
+
+		double dist = sqrt(dx * dx + dy * dy);
+		valid = dist > 4.20;
+	}
+
+	set_x(x);
+	set_y(y);
 }

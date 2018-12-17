@@ -16,10 +16,8 @@ Game::Game() : nut_(Nut(8, 9)) {
 void Game::set_up(UserInterface* pui)
 {
 	// set up player
-	
 
 	// set up snake
-	snake_.position_at_random();
 	snake_.spot_mouse(&mouse_);
 	
 	// set up the UserInterface
@@ -34,7 +32,7 @@ void Game::run()
 
 	do
 	{
-		//Reset mouse, smake and nut
+		// Reset mouse, snake and nut
 		mouse_.reset_mouse();
 		nut_.reset_nut();
 		snake_.position_at_random();
@@ -104,7 +102,7 @@ string Game::prepare_grid()
 					}
 					else
 					{
-						const int hole_no(find_hole_number_at_position(col, row));
+						const int hole_no(find_hole_number_at_position(row, col));
 
 						if (hole_no != -1)
 							os << underground_.get_hole_no(hole_no).get_symbol();
@@ -155,7 +153,7 @@ void Game::apply_rules()
 			}
 			else
 			{
-				//error message saying "You can't escape without the nut!" or something
+				p_ui->show_results_on_screen("ERROR: You can't escape without the nut!");
 			}
 		}
 		else
