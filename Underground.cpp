@@ -1,10 +1,5 @@
 #include "Underground.h"
 
-Hole::Hole() : FixedGridItem(HOLE, 0, 0)
-{
-
-}
-
 Hole::Hole(int x, int y) : FixedGridItem(HOLE, x, y)
 {
 

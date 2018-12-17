@@ -3,7 +3,6 @@ class GridItem
 {
 public:
 	GridItem(char symbol);
-	// virtual ~GridItem() = 0; // Pure virtual to create abstract class(?)
 	
 	char get_symbol() const;
 	// Virtual functions to be overriden in derivative classes

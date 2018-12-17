@@ -9,10 +9,6 @@ Snake::Snake() : MoveableGridItem(SNAKEHEAD, 0, 0)
 	// p_mouse_ = nullptr;
 }
 
-Snake::~Snake()
-{
-}
-
 bool Snake::has_caught_mouse()
 {
 	return is_at_position(p_mouse_->get_x(), p_mouse_->get_y());

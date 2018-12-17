@@ -14,7 +14,6 @@ class Hole : public FixedGridItem
 {
 	public:
 		// constructors
-		Hole();
 		Hole(int x, int y);
 
 	private:

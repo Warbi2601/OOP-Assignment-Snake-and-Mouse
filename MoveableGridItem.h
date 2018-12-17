@@ -5,7 +5,6 @@ class MoveableGridItem : public GridItem
 {
 public:
 	MoveableGridItem(char symbol, int x, int y);
-	// ~MoveableGridItem();
 	
 	int get_x();
 	int get_y();

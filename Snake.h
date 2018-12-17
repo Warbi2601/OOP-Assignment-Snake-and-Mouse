@@ -8,7 +8,6 @@
 class Snake : public MoveableGridItem {
 	public:
 		Snake();
-		~Snake();
 		bool has_caught_mouse();
 		void spot_mouse(Mouse* p_mouse);
 		void chase_mouse();
