@@ -56,3 +56,8 @@ void UserInterface::show_player_info(string name, int score) const
 	cout << "Player: " << name << "\n";
 	cout << "Score: " << score << "\n";
 }
+
+void UserInterface::show_cheat_info(const bool cheatActivated) const
+{
+	if(cheatActivated == true) cout << "Cheat Currently Active!" << "\n";
+}

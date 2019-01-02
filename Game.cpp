@@ -46,12 +46,21 @@ void Game::run()
 			if (is_arrow_key_code(key_))
 			{
 				mouse_.scamper(key_);
-				snake_.chase_mouse();
+				if (cheatActivated == false)
+				{
+					snake_.chase_mouse();
+				}
 				p_ui->draw_grid_on_screen(prepare_grid());
 				p_ui->show_player_info(player_.get_name(), player_.get_score());
+				p_ui->show_cheat_info(cheatActivated);
 				apply_rules();
 
 				if (nut_.has_been_collected()) p_ui->show_results_on_screen("NUT COLLECTED, MAKE YOUR WAY TO A HOLE");
+			}
+			else if (is_cheat_key_code(toupper(key_)))
+			{
+				cheatActivated = !cheatActivated;
+				cheatUsedInGame = true;
 			}
 
 			key_ = p_ui->get_keypress_from_user();
@@ -59,14 +68,18 @@ void Game::run()
 
 		p_ui->show_results_on_screen(prepare_end_message());
 
-		if (mouse_.is_alive())
+		if (mouse_.is_alive() && cheatUsedInGame == false)
 		{
 			player_.update_score(1);
 		}
-		else if (snake_.has_caught_mouse())
+		else if (snake_.has_caught_mouse() && cheatUsedInGame == false)
 		{
 			player_.update_score(-1);
 		}
+
+		//reset cheats for new round
+		cheatActivated = false;
+		cheatUsedInGame = false;
 	} 
 	while (p_ui->ask_if_users_wants_to_play_again());
 }
@@ -121,6 +134,11 @@ string Game::prepare_grid()
 bool Game::is_arrow_key_code(int keycode)
 {
 	return (keycode == LEFT) || (keycode == RIGHT) || (keycode == UP) || (keycode == DOWN);
+}
+
+bool Game::is_cheat_key_code(int keycode)
+{
+	return (keycode == CHEAT);
 }
 
 int Game::find_hole_number_at_position(int x, int y)

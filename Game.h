@@ -7,6 +7,9 @@
 #include "Nut.h"
 #include "Player.h"
 
+// defining cheat keys
+#define CHEAT	  (67)	// upper case 'C'
+
 class Game {
 public:
 	Game();
@@ -16,6 +19,7 @@ public:
 	void run();
 	string prepare_grid();
 	bool is_arrow_key_code(int keycode);
+	bool is_cheat_key_code(int keycode);
 	void apply_rules();
 	int find_hole_number_at_position(int x, int y);
 	bool has_ended(char key);
@@ -28,4 +32,6 @@ private:
 	UserInterface* p_ui;
 	Nut nut_;
 	Player player_;
+	bool cheatActivated;
+	bool cheatUsedInGame;
 };
