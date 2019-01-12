@@ -171,7 +171,8 @@ void Game::apply_rules()
 			}
 			else
 			{
-				p_ui->show_results_on_screen("ERROR: You can't escape without the nut!");
+				p_ui->show_results_on_screen("The mouse runs into the hole without the nut and resurfaces from a different hole");
+				underground_.get_random_hole_for_mouse(mouse_);
 			}
 		}
 		else

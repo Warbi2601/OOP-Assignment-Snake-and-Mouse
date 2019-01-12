@@ -29,7 +29,14 @@ class Underground
 		bool is_valid_hole_number(int n) const;
 		bool has_reached_a_hole(Mouse& mouse) const;
 		vector<Hole> getHoles() const;
+		void get_random_hole_for_mouse(Mouse& mouse) const;
 
 	private:
 		const vector<Hole> holes_;
+};
+
+struct location
+{
+	int x;
+	int y;
 };

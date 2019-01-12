@@ -54,3 +54,20 @@ vector<Hole> Underground::getHoles() const
 {
 	return holes_;
 }
+
+void Underground::get_random_hole_for_mouse(Mouse& mouse) const
+{
+	bool validHole = false;
+	while (!validHole)
+	{
+		int rnd = rand() % holes_.size();
+		Hole h = get_hole_no(rnd);
+		if (!mouse.is_at_position(h.get_x(), h.get_y()))
+		{
+			mouse.set_x(h.get_x());
+			mouse.set_y(h.get_y());
+			validHole = true;
+		}
+	}
+}
+
