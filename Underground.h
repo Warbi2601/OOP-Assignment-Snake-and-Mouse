@@ -34,9 +34,3 @@ class Underground
 	private:
 		const vector<Hole> holes_;
 };
-
-struct location
-{
-	int x;
-	int y;
-};

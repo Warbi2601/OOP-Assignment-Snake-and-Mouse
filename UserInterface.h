@@ -15,5 +15,6 @@ class UserInterface
 		bool ask_if_users_wants_to_play_again() const;
 		string ask_user_for_player_name() const;
 		void show_player_info(string, int) const;
-		void show_cheat_info(bool cheatActivated) const;
+		void show_cheat_info(const bool cheatActivated) const;
+		void show_undo_info(const bool undo) const;
 };

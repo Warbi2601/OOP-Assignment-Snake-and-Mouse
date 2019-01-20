@@ -37,8 +37,8 @@ void Game::run()
 		nut_.reset_nut();
 		snake_.position_at_random();
 
-		p_ui->draw_grid_on_screen(prepare_grid());
-		p_ui->show_player_info(player_.get_name(), player_.get_score());
+		undo = false;
+		render();
 		key_ = p_ui->get_keypress_from_user();
 
 		while (!has_ended(key_))
@@ -50,9 +50,11 @@ void Game::run()
 				{
 					snake_.chase_mouse();
 				}
-				p_ui->draw_grid_on_screen(prepare_grid());
-				p_ui->show_player_info(player_.get_name(), player_.get_score());
+
+				undo = true;
+				render();
 				p_ui->show_cheat_info(cheatActivated);
+
 				apply_rules();
 
 				if (nut_.has_been_collected()) p_ui->show_results_on_screen("NUT COLLECTED, MAKE YOUR WAY TO A HOLE");
@@ -61,6 +63,17 @@ void Game::run()
 			{
 				cheatActivated = !cheatActivated;
 				cheatUsedInGame = true;
+			}
+			else if (is_undo_key_code(toupper(key_))) {
+				if(undo) {
+					snake_.undo_position();
+					mouse_.undo_position();
+					// TODO uncomment this line when Nut is changed to MoveableGridItem
+					// nut_.undo_postion();
+
+					undo = false;
+					render();
+				}
 			}
 
 			key_ = p_ui->get_keypress_from_user();
@@ -82,6 +95,12 @@ void Game::run()
 		cheatUsedInGame = false;
 	} 
 	while (p_ui->ask_if_users_wants_to_play_again());
+}
+
+void Game::render() {
+	p_ui->draw_grid_on_screen(prepare_grid());
+	p_ui->show_player_info(player_.get_name(), player_.get_score());
+	p_ui->show_undo_info(undo);
 }
 
 string Game::prepare_grid()
@@ -139,6 +158,11 @@ bool Game::is_arrow_key_code(int keycode)
 bool Game::is_cheat_key_code(int keycode)
 {
 	return (keycode == CHEAT);
+}
+
+bool Game::is_undo_key_code(int keycode)
+{
+	return (keycode == UNDO);
 }
 
 int Game::find_hole_number_at_position(int x, int y)

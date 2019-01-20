@@ -88,7 +88,15 @@ MoveableGridItem *Snake::get_tail(int x, int y) {
 		}
 	}
 	return nullptr;
-;
+}
+
+void Snake::undo_position()
+{
+	MoveableGridItem::undo_position();
+
+	for (auto &item : tail_) {
+		item.undo_position();
+	}
 }
 
 const RandomNumberGenerator Snake::rng_;

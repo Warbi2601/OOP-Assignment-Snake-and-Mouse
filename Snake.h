@@ -15,6 +15,7 @@ class Snake : public MoveableGridItem {
 		void position_at_random();
 		void move_tail();
 		MoveableGridItem *get_tail(int x, int y);
+		void undo_position();
 		
 	private:
 		Mouse* p_mouse_;

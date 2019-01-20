@@ -61,3 +61,8 @@ void UserInterface::show_cheat_info(const bool cheatActivated) const
 {
 	if(cheatActivated == true) cout << "Cheat Currently Active!" << "\n";
 }
+
+void UserInterface::show_undo_info(const bool undo) const
+{
+	if(!undo) cout << "CANNOT UNDO" << "\n";
+}
