@@ -53,16 +53,17 @@ void Game::run()
 
 				undo = true;
 				render();
-				p_ui->show_cheat_info(cheatActivated);
 
 				apply_rules();
 
 				if (nut_.has_been_collected()) p_ui->show_results_on_screen("NUT COLLECTED, MAKE YOUR WAY TO A HOLE");
 			}
+			// Extension
 			else if (is_cheat_key_code(toupper(key_)))
 			{
 				cheatActivated = !cheatActivated;
 				cheatUsedInGame = true;
+				render();
 			}
 			else if (is_undo_key_code(toupper(key_))) {
 				if(undo) {
@@ -100,6 +101,8 @@ void Game::run()
 void Game::render() {
 	p_ui->draw_grid_on_screen(prepare_grid());
 	p_ui->show_player_info(player_.get_name(), player_.get_score());
+	// Extension
+	p_ui->show_cheat_info(cheatActivated);
 	p_ui->show_undo_info(undo);
 }
 
