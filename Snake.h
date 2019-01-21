@@ -13,14 +13,20 @@ class Snake : public MoveableGridItem {
 		void chase_mouse();
 		void set_direction(int& dx, int& dy);
 		void position_at_random();
+		// TAIL
 		void move_tail();
 		void clear_tail();
-		int get_tail_size();
 		MoveableGridItem *get_tail(int x, int y);
+		bool get_tail(int x, int y);
 		void undo_position();
+		bool check_explosion(int x, int y);
+		void stun();
+		void remove_stun(bool reset);
+		bool is_stunned();
 		
 	private:
 		Mouse* p_mouse_;
 		static const RandomNumberGenerator rng_;
 		vector<MoveableGridItem> tail_;
+		int stunned_ = 0;
 };

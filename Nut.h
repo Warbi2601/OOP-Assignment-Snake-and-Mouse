@@ -1,9 +1,9 @@
 #pragma once
 
-#include "FixedGridItem.h"
+#include "MoveableGridItem.h"
 #include "constants.h"
 
-class Nut : public FixedGridItem {
+class Nut : public MoveableGridItem {
 	public:
 		Nut(int, int);
 		bool has_been_collected();

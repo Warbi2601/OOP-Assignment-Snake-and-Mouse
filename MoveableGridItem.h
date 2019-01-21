@@ -25,6 +25,7 @@ public:
 	bool is_at_position(int x, int y);
 	void update_position(int dx, int dy);
 	void undo_position();
+	bool check_explosion(int x, int y);
 
 };
 
