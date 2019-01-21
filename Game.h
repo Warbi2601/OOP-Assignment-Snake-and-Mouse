@@ -6,7 +6,9 @@
 #include "UserInterface.h"
 #include "Nut.h"
 #include "Player.h"
+#include "Bomb.h"
 
+#define BOMB	  (66)	// 'B'
 // defining cheat keys
 #define CHEAT	  (67)	// upper case 'C'
 #define UNDO	  (85)	// 'U'
@@ -24,6 +26,7 @@ public:
 	bool is_arrow_key_code(int keycode);
 	bool is_cheat_key_code(int keycode);
 	bool is_undo_key_code(int keycode);
+	bool is_bomb_key_code(int keycode);
 	
 	void apply_rules();
 	int find_hole_number_at_position(int x, int y);
@@ -40,4 +43,7 @@ private:
 	bool cheatActivated;
 	bool cheatUsedInGame;
 	bool undo;
+	// Changed to pointer because it kept throwing the error:
+	// "attempting to reference a deleted function"
+	Bomb bomb_;
 };

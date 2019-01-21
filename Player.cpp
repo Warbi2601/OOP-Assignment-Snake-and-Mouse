@@ -16,3 +16,11 @@ int Player::get_score() const {
 void Player::update_score(int value) {
 	score_.update_amount(value);
 }
+
+void Player::use_bomb() {
+	used_bomb_ = true;
+}
+
+bool Player::has_used_bomb() {
+	return used_bomb_;
+}

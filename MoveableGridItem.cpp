@@ -42,3 +42,16 @@ void MoveableGridItem::undo_position()
 	y_ = lastPos.y_;
 }
 
+bool MoveableGridItem::check_explosion(int targetX, int targetY) {
+	bool hit = false;
+
+	for (int x(this->get_x() - 1); x <= this->get_x() + 1; x++) {
+		for (int y(this->get_y() - 1); y <= this->get_y() + 1; y++) {
+			if (targetX == x && targetY == y) {
+				hit = true;
+				break;
+			}
+		}
+	}
+	return hit;
+}

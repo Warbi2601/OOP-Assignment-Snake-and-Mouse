@@ -7,7 +7,7 @@ using namespace std;
 //
 // This will be updated to MoveableGridItem for the extended version,
 // As it becomes pushable.
-Nut::Nut(int setX, int setY) : FixedGridItem(NUT, setX, setY)
+Nut::Nut(int setX, int setY) : MoveableGridItem(NUT, setX, setY)
 {
 	// Extended version
 	// position_at_random();

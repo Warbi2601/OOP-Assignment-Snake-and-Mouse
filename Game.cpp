@@ -30,12 +30,12 @@ void Game::run()
 
 	player_.set_name(p_ui->ask_user_for_player_name());
 
-	do
-	{
+	do {
 		// Reset mouse, snake and nut
 		mouse_.reset_mouse();
 		nut_.reset_nut();
 		snake_.position_at_random();
+		snake_.remove_stun(true);
 
 		undo = false;
 		render();
@@ -46,9 +46,14 @@ void Game::run()
 			if (is_arrow_key_code(key_))
 			{
 				mouse_.scamper(key_);
-				if (cheatActivated == false)
-				{
-					snake_.chase_mouse();
+				
+				if (snake_.is_stunned()) {
+					snake_.remove_stun(false);
+				}
+				else {
+					if (cheatActivated == false) {
+						snake_.chase_mouse();
+					}
 				}
 
 				undo = true;
@@ -74,6 +79,19 @@ void Game::run()
 
 					undo = false;
 					render();
+				}
+			}
+			else if (is_bomb_key_code(toupper(key_))) {
+				if (!player_.has_used_bomb() || cheatActivated) {
+					bomb_.set_x(mouse_.get_x());
+					bomb_.set_y(mouse_.get_y());
+
+					bomb_.set_active(true);
+					player_.use_bomb();
+				}
+				else {
+					render();
+					cout << "You're out of bombs!" << endl;
 				}
 			}
 
@@ -109,42 +127,45 @@ void Game::render() {
 string Game::prepare_grid()
 {
 	// this function builds up a big string which holds the entire game state
-
 	ostringstream os;
 
 	for (int col(1); col <= SIZE; ++col)
 	{
 		for (int row(1); row <= SIZE; ++row)
 		{
+			if (bomb_.is_active()) {
+				if (bomb_.has_exploded()) {
+					if (bomb_.check_explosion(row, col)) {
+						os << '*';
+						continue;
+					}
+				}
+				else if (bomb_.is_at_position(row, col)) {
+					os << bomb_.get_time();
+					continue;
+				}
+			}
+			
 			if (snake_.is_at_position(row, col))
 			{
-				os << snake_.get_symbol();
+				os << (snake_.is_stunned() ? '$' : snake_.get_symbol());
 			}
 			else if (snake_.get_tail(row, col)) {
 				os << SNAKETAIL;
 			}
-			else
-			{
-				if (mouse_.is_at_position(row, col))
-				{
-					os << mouse_.get_symbol();
-				}
-				else
-				{
- 					if (nut_.is_at_position(row, col))
-					{
-						os << (nut_.has_been_collected() ? FREECELL : nut_.get_symbol());
-					}
-					else
-					{
-						const int hole_no(find_hole_number_at_position(row, col));
+			else if (mouse_.is_at_position(row, col)) {
+				os << mouse_.get_symbol();
+			}
+			else if (nut_.is_at_position(row, col)) {
+				os << (nut_.has_been_collected() ? FREECELL : nut_.get_symbol());
+			}
+			else {
+				const int hole_no(find_hole_number_at_position(row, col));
 
-						if (hole_no != -1)
-							os << underground_.get_hole_no(hole_no).get_symbol();
-						else
-							os << FREECELL;
-					}
-				}
+				if (hole_no != -1)
+					os << underground_.get_hole_no(hole_no).get_symbol();
+				else
+					os << FREECELL;
 			}
 		}
 		os << endl;
@@ -166,6 +187,11 @@ bool Game::is_cheat_key_code(int keycode)
 bool Game::is_undo_key_code(int keycode)
 {
 	return (keycode == UNDO);
+}
+
+bool Game::is_bomb_key_code(int keycode)
+{
+	return (keycode == BOMB);
 }
 
 int Game::find_hole_number_at_position(int x, int y)
@@ -190,6 +216,22 @@ void Game::apply_rules()
 	}
 	else
 	{
+		if (bomb_.is_active()) {
+			if (bomb_.has_exploded()) {
+				if (mouse_.check_explosion(bomb_.get_x(), bomb_.get_y())) {
+					mouse_.die();
+				}
+				if (snake_.check_explosion(bomb_.get_x(), bomb_.get_y())) {
+					snake_.stun();
+				}
+
+				bomb_.reset();
+			}
+			else {
+				bomb_.tick();
+			}
+		}
+
 		if (underground_.has_reached_a_hole(mouse_))
 		{
 			if (nut_.has_been_collected())
@@ -228,7 +270,7 @@ string Game::prepare_end_message()
 	{
 		if (!mouse_.is_alive())
 		{
-			os << "\n\nEND OF GAME: THE SNAKE ATE THE MOUSE!";
+			os << "\n\nEND OF GAME: THE MOUSE DIED!";
 		}
 		else
 		{

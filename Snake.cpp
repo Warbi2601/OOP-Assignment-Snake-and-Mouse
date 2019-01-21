@@ -81,22 +81,47 @@ void Snake::move_tail() {
 	}
 }
 
-MoveableGridItem *Snake::get_tail(int x, int y) {
+bool Snake::get_tail(int x, int y) {
 	for (auto &item : tail_) {
 		if (item.is_at_position(x, y)) {
-			return &item;
+			return true;
 		}
 	}
-	return nullptr;
+	return false;
 }
 
-void Snake::undo_position()
-{
+void Snake::undo_position() {
 	MoveableGridItem::undo_position();
 
 	for (auto &item : tail_) {
 		item.undo_position();
 	}
+}
+
+bool Snake::check_explosion(int x, int y) {
+	bool hit = MoveableGridItem::check_explosion(x, y);
+
+	for (auto &item : tail_) {
+		hit = (hit || item.check_explosion(x, y));
+	}
+	return hit;
+}
+
+void Snake::stun() {
+	stunned_ = 3;
+}
+
+void Snake::remove_stun(bool reset) {
+	if (reset) {
+		stunned_ = 0;
+	}
+	else {
+		stunned_--;
+	}
+}
+
+bool Snake::is_stunned() {
+	return stunned_ > 0;
 }
 
 const RandomNumberGenerator Snake::rng_;
