@@ -2,7 +2,6 @@
 
 Bomb::Bomb() : MoveableGridItem('B', 0, 0)
 {
-	reset();
 }
 
 void Bomb::reset() {
@@ -29,4 +28,8 @@ bool Bomb::is_active() {
 
 void Bomb::set_active(bool value) {
 	active_ = value;
+}
+
+void Bomb::set_time(int time) {
+	time_ = time;
 }

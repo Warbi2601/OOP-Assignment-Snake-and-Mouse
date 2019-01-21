@@ -77,8 +77,6 @@ void Game::run()
 				if(undo) {
 					snake_.undo_position();
 					mouse_.undo_position();
-					// TODO uncomment this line when Nut is changed to MoveableGridItem
-					// nut_.undo_postion();
 
 					undo = false;
 					render();
@@ -219,6 +217,23 @@ void Game::file(char k) {
 			getline(fin, line);
 			if (stoi(line) == 0) nut_.set_nut(false);
 			else nut_.set_nut(true);
+			// Bomb
+			getline(fin, line);
+			if (stoi(line) == 0) player_.set_used_bomb(false);
+			else player_.set_used_bomb(true);
+			// Location
+			getline(fin, line);
+			bomb_.set_x(stoi(line));
+			getline(fin, line);
+			bomb_.set_y(stoi(line));
+			// Time
+			getline(fin, line);
+			bomb_.set_time(stoi(line));
+			getline(fin, line);
+			// Active
+			if (stoi(line) == 0) bomb_.set_active(false);
+			else bomb_.set_active(true);
+
 			snake_.clear_tail();
 			render();
 			cout << "\nLoad was successful";
@@ -238,6 +253,12 @@ void Game::file(char k) {
 			fout << snake_.get_x() << "\n";
 			fout << snake_.get_y() << "\n";
 			fout << nut_.has_been_collected() << "\n";
+
+			fout << player_.has_used_bomb() << "\n";
+			fout << bomb_.get_x() << "\n";
+			fout << bomb_.get_y() << "\n";
+			fout << bomb_.get_time() << "\n";
+			fout << bomb_.is_active() << "\n";
 			render();
 			cout << "\nSave Successful.";
 		}

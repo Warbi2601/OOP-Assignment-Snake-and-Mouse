@@ -14,5 +14,6 @@ public:
 	bool has_exploded();
 	bool is_active();
 	void set_active(bool active);
+	void set_time(int time);
 };
 
