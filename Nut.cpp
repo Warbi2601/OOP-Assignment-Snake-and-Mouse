@@ -23,6 +23,11 @@ void Nut::collect_nut()
 	collected = true;
 }
 
+void Nut::set_nut(bool collected) 
+{
+	this->collected = collected;
+}
+
 void Nut::reset_nut()
 {
 	this->collected = false;

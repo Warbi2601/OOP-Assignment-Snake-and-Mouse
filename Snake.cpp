@@ -90,6 +90,9 @@ MoveableGridItem *Snake::get_tail(int x, int y) {
 	return nullptr;
 }
 
+void Snake::clear_tail() {
+	tail_.clear();
+}
 void Snake::undo_position()
 {
 	MoveableGridItem::undo_position();
@@ -104,7 +107,7 @@ const RandomNumberGenerator Snake::rng_;
 void Snake::position_at_random()
 {
 	assert(p_mouse_ != nullptr);
-	tail_.clear();
+	clear_tail();
 
 	// WARNING: this may place on top of other things
 	bool valid = false;

@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <fstream>
 
 using namespace std;
 
@@ -74,6 +75,9 @@ void Game::run()
 					undo = false;
 					render();
 				}
+			}
+			else if (is_file_key_code(toupper(key_))) {
+				file(key_);
 			}
 
 			key_ = p_ui->get_keypress_from_user();
@@ -164,6 +168,61 @@ bool Game::is_undo_key_code(int keycode)
 {
 	return (keycode == UNDO);
 }
+
+bool Game::is_file_key_code(int keycode) {
+	return (keycode == SAVE) || (keycode == LOAD);
+}
+
+void Game::file(char k) {
+	switch (k) {
+	case LOAD: {
+		string line;
+		ifstream fin;
+		fin.open("Game.txt", ios::in);
+		if (fin.fail()) cout << "\nerror loading game.";
+		else {
+			getline(fin, line);
+			player_.set_name(line);
+			getline(fin, line);
+			player_.update_score(stoi(line));
+			getline(fin, line);
+			mouse_.set_x(stoi(line));
+			getline(fin, line);
+			mouse_.set_y(stoi(line));
+			getline(fin, line);
+			snake_.set_x(stoi(line));
+			getline(fin, line);
+			snake_.set_y(stoi(line));
+			getline(fin, line);
+			if (stoi(line) == 0) nut_.set_nut(false);
+			else nut_.set_nut(true);
+			snake_.clear_tail();
+			render();
+			cout << "Load was successful";
+		}
+		fin.close();
+		break;
+	}
+	case SAVE: {
+		ofstream fout;
+		fout.open("Game.txt", ios::out);
+		if (fout.fail()) cout << "\nError saving game.";
+		else {
+			fout << player_.get_name() << "\n";
+			fout << player_.get_score() << "\n";
+			fout << mouse_.get_x() << "\n";
+			fout << mouse_.get_y() << "\n";
+			fout << snake_.get_x() << "\n";
+			fout << snake_.get_y() << "\n";
+			fout << nut_.has_been_collected() << "\n";
+			cout << "\n Save Successful.";
+		}
+		fout.close();
+		break;
+	}
+	}
+}
+
 
 int Game::find_hole_number_at_position(int x, int y)
 {

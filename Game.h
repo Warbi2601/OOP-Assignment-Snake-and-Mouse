@@ -10,6 +10,8 @@
 // defining cheat keys
 #define CHEAT	  (67)	// upper case 'C'
 #define UNDO	  (85)	// 'U'
+#define SAVE      (83)  // 'S'
+#define LOAD      (76)  // 'L'
 
 class Game {
 public:
@@ -24,6 +26,7 @@ public:
 	bool is_arrow_key_code(int keycode);
 	bool is_cheat_key_code(int keycode);
 	bool is_undo_key_code(int keycode);
+	bool is_file_key_code(int keycode);
 	
 	void apply_rules();
 	int find_hole_number_at_position(int x, int y);
@@ -40,4 +43,5 @@ private:
 	bool cheatActivated;
 	bool cheatUsedInGame;
 	bool undo;
+	void file(char k);
 };
