@@ -48,25 +48,28 @@ void Game::run()
 		{
 			if (is_arrow_key_code(key_))
 			{
-				mouse_.scamper(key_);
-				
-				if (snake_.is_stunned()) {
-					snake_.remove_stun(false);
+			mouse_.scamper(key_);
+
+			if (snake_.is_stunned()) {
+				snake_.remove_stun(false);
+			}
+			else {
+				if (cheatActivated == false) {
+					snake_.chase_mouse();
 				}
-				else {
-					if (cheatActivated == false) {
-						snake_.chase_mouse();
-					}
-				}
+			}
 
-				undo = true;
-				render();
+			undo = true;
 
-				apply_rules();
+			apply_rules();
+			render();
 
-				if (nut_.has_been_collected()) p_ui->show_results_on_screen("NUT COLLECTED, MAKE YOUR WAY TO A HOLE");
+			if (nut_.has_been_collected()) p_ui->show_results_on_screen("NUT COLLECTED, MAKE YOUR WAY TO A HOLE");
 			}
 			// Extension
+			if (is_file_key_code(toupper(key_))) {
+			file(key_);
+			}
 			else if (is_cheat_key_code(toupper(key_)))
 			{
 				cheatActivated = !cheatActivated;
@@ -81,9 +84,6 @@ void Game::run()
 					undo = false;
 					render();
 				}
-			}
-			else if (is_file_key_code(toupper(key_))) {
-				file(key_);
 			}
 			else if (is_bomb_key_code(toupper(key_))) {
 				if (!player_.has_used_bomb() || cheatActivated) {
@@ -235,6 +235,23 @@ void Game::file(char k) {
 			else bomb_.set_active(true);
 
 			snake_.clear_tail();
+			string line2;
+			for (int i = 0; i < 3; i++) { // <3
+				getline(fin, line);
+				getline(fin, line2);
+
+				if (!line.empty() && !line2.empty()) {
+					int x(stoi(line));
+					int y(stoi(line2));
+
+					snake_.add_tail(x, y);
+				}
+				else {
+					break;
+				}
+			}
+
+			// snake_.clear_tail();
 			render();
 			cout << "\nLoad was successful";
 		}
@@ -259,6 +276,13 @@ void Game::file(char k) {
 			fout << bomb_.get_y() << "\n";
 			fout << bomb_.get_time() << "\n";
 			fout << bomb_.is_active() << "\n";
+
+			vector<location> locations = snake_.get_tail();
+			for (auto &loc : locations) {
+				fout << loc.x_ << "\n";
+				fout << loc.y_ << "\n";
+			}
+
 			render();
 			cout << "\nSave Successful.";
 		}
@@ -308,7 +332,9 @@ void Game::apply_rules()
 				bomb_.reset();
 			}
 			else {
-				bomb_.tick();
+				if (!cheatActivated) {
+					bomb_.tick();
+				}
 			}
 		}
 

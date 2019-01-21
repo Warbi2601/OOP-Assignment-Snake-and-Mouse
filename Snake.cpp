@@ -77,8 +77,21 @@ void Snake::move_tail() {
 	}
 
 	if(size < 3) {
-		tail_.push_back(MoveableGridItem(SNAKETAIL, x, y));
+		add_tail(x, y);
 	}
+}
+
+void Snake::add_tail(int x, int y) {
+	tail_.push_back(MoveableGridItem(SNAKETAIL, x, y));
+}
+
+vector<location> Snake::get_tail() {
+	vector<location> locations;
+
+	for (auto &item : tail_) {
+		locations.push_back(location { item.get_x(), item.get_y() });
+	}
+	return locations;
 }
 
 bool Snake::get_tail(int x, int y) {

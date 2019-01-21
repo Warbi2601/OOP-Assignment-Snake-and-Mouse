@@ -5,7 +5,7 @@ Bomb::Bomb() : MoveableGridItem('B', 0, 0)
 }
 
 void Bomb::reset() {
-	time_ = 3;
+	time_ = 4;
 	active_ = false;
 }
 
