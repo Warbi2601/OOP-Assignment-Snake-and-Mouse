@@ -93,8 +93,7 @@ bool Snake::get_tail(int x, int y) {
 void Snake::clear_tail() {
 	tail_.clear();
 }
-void Snake::undo_position()
-{
+
 void Snake::undo_position() {
 	MoveableGridItem::undo_position();
 

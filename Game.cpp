@@ -37,6 +37,8 @@ void Game::run()
 		nut_.reset_nut();
 		snake_.position_at_random();
 		snake_.remove_stun(true);
+		bomb_.reset();
+		player_.set_used_bomb(false);
 
 		undo = false;
 		render();
@@ -91,11 +93,7 @@ void Game::run()
 					bomb_.set_y(mouse_.get_y());
 
 					bomb_.set_active(true);
-					player_.use_bomb();
-				}
-				else {
-					render();
-					cout << "You're out of bombs!" << endl;
+					player_.set_used_bomb(true);
 				}
 			}
 
@@ -126,6 +124,7 @@ void Game::render() {
 	// Extension
 	p_ui->show_cheat_info(cheatActivated);
 	p_ui->show_undo_info(undo);
+	p_ui->show_bomb_info(!player_.has_used_bomb() || cheatActivated);
 }
 
 string Game::prepare_grid()
@@ -222,7 +221,7 @@ void Game::file(char k) {
 			else nut_.set_nut(true);
 			snake_.clear_tail();
 			render();
-			cout << "Load was successful";
+			cout << "\nLoad was successful";
 		}
 		fin.close();
 		break;
@@ -239,7 +238,8 @@ void Game::file(char k) {
 			fout << snake_.get_x() << "\n";
 			fout << snake_.get_y() << "\n";
 			fout << nut_.has_been_collected() << "\n";
-			cout << "\n Save Successful.";
+			render();
+			cout << "\nSave Successful.";
 		}
 		fout.close();
 		break;

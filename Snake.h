@@ -16,7 +16,6 @@ class Snake : public MoveableGridItem {
 		// TAIL
 		void move_tail();
 		void clear_tail();
-		MoveableGridItem *get_tail(int x, int y);
 		bool get_tail(int x, int y);
 		void undo_position();
 		bool check_explosion(int x, int y);

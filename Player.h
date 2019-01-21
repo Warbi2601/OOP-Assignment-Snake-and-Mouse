@@ -10,7 +10,7 @@ class Player {
 		void set_name(string);
 		int get_score() const;
 		void update_score(int);
-		void use_bomb();
+		void set_used_bomb(bool);
 		bool has_used_bomb();
 
 	private:

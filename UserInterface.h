@@ -17,4 +17,5 @@ class UserInterface
 		void show_player_info(string, int) const;
 		void show_cheat_info(const bool cheatActivated) const;
 		void show_undo_info(const bool undo) const;
+		void show_bomb_info(const bool bombAvailable) const;
 };

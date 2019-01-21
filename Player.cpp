@@ -17,8 +17,8 @@ void Player::update_score(int value) {
 	score_.update_amount(value);
 }
 
-void Player::use_bomb() {
-	used_bomb_ = true;
+void Player::set_used_bomb(bool value) {
+	used_bomb_ = value;
 }
 
 bool Player::has_used_bomb() {

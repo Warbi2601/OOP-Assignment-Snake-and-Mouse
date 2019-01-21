@@ -64,5 +64,10 @@ void UserInterface::show_cheat_info(const bool cheatActivated) const
 
 void UserInterface::show_undo_info(const bool undo) const
 {
-	if(!undo) cout << "CANNOT UNDO" << "\n";
+	if (!undo) cout << "CANNOT UNDO" << "\n";
+}
+
+void UserInterface::show_bomb_info(bool bombAvailable) const
+{
+	cout << "(B)ombs available: " << (bombAvailable ? 1 : 0);
 }
